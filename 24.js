@@ -1,23 +1,4 @@
-function parse(s) {
-  switch (s.toUpperCase()) {
-  case "A":
-    return 1;
-  case "J":
-    return 11;
-  case "Q":
-    return 12;
-  case "K":
-    return 13;
-  }
-  var n = parseInt(s);
-  if (isNaN(n) || n < 1 || n > 13) {
-    alert("Invalid Input: " + s);
-    return 0;
-  }
-  return n;
-}
-
-function calc(expressions, na, nb, nc, nd) {
+function solve1(expressions, na, nb, nc, nd, na1, nb1, na2, na3) {
   var solutions = [];
   for (var i = 0; i < expressions.length; i ++) {
     var value = expressions[i];
@@ -29,14 +10,10 @@ function calc(expressions, na, nb, nc, nd) {
       solutions.push(value + "=24");
     }
   }
-  output.innerHTML = solutions.length + " Solutions<br>" + solutions.join("<br>");
+  return solutions;
 }
 
-function calculate() {
-  var ns = [parse(input_a.value), parse(input_b.value), parse(input_c.value), parse(input_d.value)];
-  if (ns.indexOf(0) >= 0) {
-    return;
-  }
+function solve(ns) {
   ns.sort();
   var n0 = ns[0];
   var n1 = ns[1];
@@ -46,31 +23,30 @@ function calculate() {
     if (n1 == n2) {
       if (n2 == n3) {
         // n0 = n1 = n2 = n3
-        calc(EXPRESSIONS_AAAA, n0, 0, 0, 0);
-      } else {
-        // n0 = n1 = n2 < n3
-        calc(EXPRESSIONS_AAAB, n0, n3, 0, 0);
+        return solve1(EXP_AAAA, n0);
       }
-    } else if (n2 == n3) {
-      // n0 = n1 < n2 = n3
-      calc(EXPRESSIONS_AABB, n0, n2, 0, 0);
-    } else {
-      // n0 = n1 < n2 < n3
-      calc(EXPRESSIONS_AABC, n0, n2, n3, 0);
+      // n0 = n1 = n2 < n3
+      return solve1(EXP_AAAB, n0, n3);
     }
-  } else if (n1 == n2) {
+    if (n2 == n3) {
+      // n0 = n1 < n2 = n3
+      return solve1(EXP_AABB, n0, n2);
+    }
+    // n0 = n1 < n2 < n3
+    return solve1(EXP_AABC, n0, n2, n3);
+  }
+  if (n1 == n2) {
     if (n2 == n3) {
       // n0 < n1 = n2 = n3
-      calc(EXPRESSIONS_AAAB, n1, n0, 0, 0);
-    } else {
-      // n0 < n1 = n2 < n3
-      calc(EXPRESSIONS_AABC, n1, n0, n3, 0);
+      return solve1(EXP_AAAB, n1, n0);
     }
-  } else if (n2 == n3) {
-    // n0 < n1 < n2 = n3
-    calc(EXPRESSIONS_AABC, n2, n0, n1, 0);
-  } else {
-    // n0 < n1 < n2 < n3
-    calc(EXPRESSIONS_ABCD, n0, n1, n2, n3);
+    // n0 < n1 = n2 < n3
+    return solve1(EXP_AABC, n1, n0, n3);
   }
+  if (n2 == n3) {
+    // n0 < n1 < n2 = n3
+    return solve1(EXP_AABC, n2, n0, n1);
+  }
+  // n0 < n1 < n2 < n3
+  return solve1(EXP_ABCD, n0, n1, n2, n3);
 }

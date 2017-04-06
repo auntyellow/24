@@ -2,7 +2,38 @@
 <input type="text" id="input_b" value="J" size="1">
 <input type="text" id="input_c" value="Q" size="1">
 <input type="text" id="input_d" value="K" size="1">
-<input type="button" value="Calculate" onclick="calculate()">
+<input type="button" value="Solve" onclick="clickSolve()">
 <script type="text/javascript" src="24-expressions.js"></script>
 <script type="text/javascript" src="24.js"></script>
 <br><span id="output"></span>
+<script type="text/javascript"><!--
+
+function parse(s) {
+  switch (s.toUpperCase()) {
+  case "A":
+    return 1;
+  case "J":
+    return 11;
+  case "Q":
+    return 12;
+  case "K":
+    return 13;
+  }
+  var n = parseInt(s);
+  if (isNaN(n) || n < 1 || n > 13) {
+    alert("Invalid Input: " + s);
+    return 0;
+  }
+  return n;
+}
+
+function clickSolve() {
+  var ns = [parse(input_a.value), parse(input_b.value), parse(input_c.value), parse(input_d.value)];
+  if (ns.indexOf(0) >= 0) {
+    return;
+  }
+  var solutions = solve(ns);
+  output.innerHTML = solutions.length + " Solutions<br>" + solutions.join("<br>");
+}
+
+--></script>
