@@ -61,7 +61,17 @@ function writeExp(name, sa, sb, sc, sd) {
             if (isNaN(value)) {
               continue;
             }
-            valueMap["_" + Math.floor(value * 1000000)] = expression;
+            var key = "_" + Math.floor(value * 1000000);
+            var old = valueMap[key];
+            if (typeof old == "string") {
+              var oldSlashes = old.split("/").length;
+              var newSlashes = expression.split("/").length;
+              if (newSlashes < oldSlashes) {
+                valueMap[key] = expression;
+              }
+            } else {
+              valueMap[key] = expression;
+            }
           }
         }
       }

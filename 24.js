@@ -18,7 +18,7 @@ function solve1(expressions, na, nb, nc, nd, na1, nb1, na2, na3) {
 }
 
 function solve(ns) {
-  ns.sort();
+  ns.sort(function (a,b) {return a - b});
   var n0 = ns[0];
   var n1 = ns[1];
   var n2 = ns[2];
