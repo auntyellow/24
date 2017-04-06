@@ -1,0 +1,22 @@
+<script type="text/javascript" src="24-expressions.js"></script>
+<script type="text/javascript" src="24.js"></script>
+<span id="output"></span>
+<script type="text/javascript"><!--
+
+function test(na, nb, nc, nd, expected) {
+  var ns = [na, nb, nc, nd];
+  var solutions = solve(ns);
+  return ns + " should have " + expected + " solution(s), actually " +
+      solutions.length + " solution(s)<br>" + solutions.join("<br>") + "<br>";
+}
+
+var s = "";
+s += test(3, 3, 3, 3, 1); // aaaa
+s += test(3, 3, 3, 4, 2); // aaaa'
+s += test(3, 3, 3, 5, 1); // aaab
+s += test(5, 5, 4, 4, 1); // aaa'a'
+s += test(3, 3, 5, 5, 1); // aabb
+s += test(2, 3, 6, 12, 10); // abcd
+output.innerHTML = s;
+
+--></script>
