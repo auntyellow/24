@@ -83,17 +83,17 @@ writeExp("EXP_AABB", "a", "a", "b", "b");
 writeExp("EXP_AAAB", "a", "a", "a", "b");
 writeExp("EXP_AAAA", "a", "a", "a", "a");
 
-writeExp("EXP_1ABC", "1", "a", "b", "c");
-writeExp("EXP_1AAB", "1", "a", "a", "b");
-writeExp("EXP_1AAA", "1", "a", "a", "a");
-writeExp("EXP_11AB", "1", "1", "a", "b");
-writeExp("EXP_11AA", "1", "1", "a", "a");
-writeExp("EXP_111A", "1", "1", "1", "a");
+writeExp("EXP_1ABC", "a", "b", "c", "1");
+writeExp("EXP_1AAB", "a", "a", "b", "1");
+writeExp("EXP_1AAA", "a", "a", "a", "1");
+writeExp("EXP_11AB", "a", "b", "1", "1");
+writeExp("EXP_11AA", "a", "a", "1", "1");
+writeExp("EXP_111A", "a", "1", "1", "1");
 
-writeExp("EXP_22AB", "2", "2", "a", "b");
-writeExp("EXP_22AA", "2", "2", "a", "a");
-writeExp("EXP_122A", "1", "2", "2", "a");
-writeExp("EXP_2AAB", "2", "a", "a", "b");
+writeExp("EXP_22AB", "a", "b", "2", "2");
+writeExp("EXP_22AA", "a", "a", "2", "2");
+writeExp("EXP_122A", "a", "2", "2", "1");
+writeExp("EXP_2AAB", "a", "a", "b", "2");
 
 document.write("var EXP_AB = [\"a+b\", \"a*b\"];<br><br>");
 document.write("var EXP_AA = [\"a+a\"];<br><br>");
