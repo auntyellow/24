@@ -1,9 +1,5 @@
 var CONST_A = Math.PI;
-var CONST_A1 = Math.PI + 1;
-var CONST_A2 = Math.PI + 2;
-var CONST_A3 = Math.PI + 3;
 var CONST_B = Math.E;
-var CONST_B1 = Math.E + 1;
 var CONST_C = Math.log(Math.PI);
 var CONST_D = Math.atan(Math.E);
 var PARENTHESES = ["((oxo)xo)xo", "(ox(oxo))xo", "(oxo)x(oxo)", "ox((oxo)xo)", "ox(ox(oxo))"];
@@ -50,11 +46,7 @@ function writeExp(name, sa, sb, sc, sd) {
             expression = expression.replace("x", OPERATORS[k]);
             expression = expression.replace("x", OPERATORS[m]);
             var value = expression;
-            value = value.split("a'''").join(CONST_A3);
-            value = value.split("a''").join(CONST_A2);
-            value = value.split("a'").join(CONST_A1);
             value = value.split("a").join(CONST_A);
-            value = value.split("b'").join(CONST_B1);
             value = value.split("b").join(CONST_B);
             value = value.split("c").join(CONST_C);
             value = value.split("d").join(CONST_D);
