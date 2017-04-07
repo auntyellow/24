@@ -33,7 +33,7 @@ function clickSolve() {
     return;
   }
   var solutions = solve(ns);
-  output.innerHTML = solutions.length + " solution(s)<br>" + solutions.join("<br>");
+  output.innerHTML = solutions.length + " solution(s)<br>" + append(solutions, "=24").join("<br>");
 }
 
 --></script>
