@@ -3,7 +3,6 @@ var CONST_B = Math.E;
 var CONST_C = Math.log(Math.PI);
 var CONST_D = Math.atan(Math.E);
 var PARENTHESES = ["((oxo)xo)xo", "(ox(oxo))xo", "(oxo)x(oxo)", "ox((oxo)xo)", "ox(ox(oxo))"];
-var PARENTHESES_3 = ["(oxo)xo", "ox(oxo)"];
 var OPERATORS = ["+", "-", "*", "/"];
 
 // Expressions = Parentheses x Positions x Operators
