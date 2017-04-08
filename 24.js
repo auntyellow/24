@@ -14,11 +14,10 @@ function filter(input, pattern) {
   var output = [];
   for (var i = 0; i < input.length; i ++) {
     var exp = input[i];
-    var _exp = "(" + exp;
-    var exp_ = exp + ")";
-    if (_exp.indexOf("(" + pattern + "*") < 0 &&
-        exp_.indexOf("*" + pattern + ")") < 0 &&
-        exp_.indexOf("/" + pattern + ")") < 0) {
+    var _exp_ = "(" + exp + ")";
+    if (_exp_.indexOf("(" + pattern + "*") < 0 &&
+        _exp_.indexOf("*" + pattern + ")") < 0 &&
+        _exp_.indexOf("/" + pattern + ")") < 0) {
       output.push(exp);
     }
   }
@@ -61,12 +60,12 @@ function solve(ns) {
         // 111Q
         return solve4(EXP_111A, n3);
       }
+      // 3335
       var result = solve4(EXP_AAAB, n0, n3);
       if (n3 - n0 == 1) {
         // 3334
         return filterSub(result, n3, n0).concat(appendSub(solve4(EXP_AA, n0), n3, n0));
       }
-      // 3335
       return result;
     }
     if (n2 == n3) {
@@ -79,12 +78,12 @@ function solve(ns) {
         // 2233
         return solve4(EXP_22AA, n2);
       }
+      // 3355
       var result = solve4(EXP_AABB, n2, n0);
       if (n2 - n1 == 1) {
         // 4455
         return filterSub(result, n2, n0).concat(appendSub(solve4(EXP_AB, n2, n0), n3, n0));
       }
-      // 3355
       return result;
     }
     // n0 = n1 < n2 < n3
@@ -93,21 +92,21 @@ function solve(ns) {
       return solve4(EXP_11AB, n3, n2);
     }
     if (n0 == 2) {
+      // 2245
       var result = solve4(EXP_22AB, n3, n2);
       if (n2 == 3) {
         // 223Q
         return filterSub(result, 3, 2).concat(appendSub(solve4(EXP_AB, n3, 2), 3, 2));
       }
-      // 2245
       return result;
     }
+    // 3356
     var result = solve4(EXP_AABC, n0, n3, n2);
     if (n2 - n0 == 1) {
       // 3348
       return filterSub(result, n2, n0).concat(appendSub(solve4(EXP_AB, n3, n0), n2, n0));
     }
     // n3 - n2 == 1 && n0 + n0 == 24 is impossible
-    // 3356
     return result;
   }
   if (n1 == n2) {
@@ -130,102 +129,110 @@ function solve(ns) {
       return solve4(EXP_1AAB, n1, n3);
     }
     if (n0 == 2) {
+      // 2668
       var result = solve4(EXP_2AAB, n1, n3);
+      var result2 = [];
       if (n1 == 3) {
         // 2338
-        return filterSub(result, 3, 2).concat(appendSub(solve4(EXP_AB, n3, 3), 3, 2));
+        result = filterSub(result, 3, 2);
+        result2 = result2.concat(appendSub(solve4(EXP_AB, n3, 3), 3, 2));
       }
       if (n3 - n1 == 1) {
         // 2QQK
-        return filterSub(result, n3, n1).concat(appendSub(solve4(EXP_AB, n1, 2), n3, n1));
+        result = filterSub(result, n3, n1);
+        result2 = result2.concat(appendSub(solve4(EXP_AB, n1, 2), n3, n1));
       }
-      // 2668
-      return result;
+      // 2334
+      return result.concat(result2);
     }
+    // 3669
     var result = solve4(EXP_AABC, n1, n3, n0);
+    var result2 = [];
     if (n1 - n0 == 1) {
       // 3446
-      // n1 - n0 == 1 && n3 - n1 == 1 && (n0 + n1 == 24 || n1 + n3 == 24) is impossible
-      return filterSub(result, n1, n0).concat(appendSub(solve4(EXP_AB, n3, 1), n1, n0));
+      result = filterSub(result, n1, n0);
+      result2 = result2.concat(appendSub(solve4(EXP_AB, n3, 1), n1, n0));
     }
     if (n3 - n1 == 1) {
       // 4667
-      return filterSub(result, n3, n1).concat(appendSub(solve4(EXP_AB, n1, 0), n3, n1));
+      result = filterSub(result, n3, n1);
+      result2 = result2.concat(appendSub(solve4(EXP_AB, n1, 0), n3, n1));
     }
-    // 3669
-    return result;
+    // 5667
+    return result.concat(result2);
   }
   if (n2 == n3) {
     // n0 < n1 < n2 = n3
     if (n0 == 1) {
+      // 1366
       var result = solve4(EXP_1AAB, n3, n1);
       if (n1 == 2) {
         // 12QQ
         return filterSub(result, 2, 1).concat(appendSub(solve4(EXP_AA, n2), 2, 1));
       }
-      // 1366
       return result;
     }
     if (n0 == 2) {
+      // 2466
       var result = solve4(EXP_2AAB, n3, n1);
+      var result2 = [];
       if (n1 == 3) {
         // 23QQ
-        return filterSub(result, 3, 2).concat(appendSub(solve4(EXP_AA, n2), 3, 2));
+        result = filterSub(result, 3, 2);
+        result2 = result2.concat(appendSub(solve4(EXP_AA, n2), 3, 2));
       }
       if (n2 - n1 == 1) {
         // 2JQQ
-        return filterSub(result, n2, n1).concat(appendSub(solve4(EXP_AB, n2, 2), n2, n1));
+        result = filterSub(result, n2, n1);
+        result2 = result2.concat(appendSub(solve4(EXP_AB, n2, 2), n2, n1));
       }
-      // 2466
-      return result;
+      // 2344
+      return result.concat(result2);
     }
+    // 4688
     var result = solve4(EXP_AABC, n2, n1, n0);
+    var result2 = [];
     if (n1 - n0 == 1) {
-      result = filterSub(result, n1, n0).concat(appendSub(solve4(EXP_AA, n2), n1, n0));
-      if (n2 - n1 == 1) {
-        // JQKK
-        return filterSub(result, n2, n1).concat(appendSub(solve4(EXP_AB, n2, n0), n2, n1));
-      }
       // 34QQ
-      return result;
+      result = filterSub(result, n1, n0);
+      result2 = result2.concat(appendSub(solve4(EXP_AA, n2), n1, n0));
     }
     if (n2 - n1 == 1) {
       // 3788
-      return filterSub(result, n2, n1).concat(appendSub(solve4(EXP_AB, n2, n0), n2, n1));
+      result = filterSub(result, n2, n1);
+      result2 = result2.concat(appendSub(solve4(EXP_AB, n2, n0), n2, n1));
     }
-    // 4688
-    return result;
+    // JQKK
+    return result.concat(result2);
   }
   // n0 < n1 < n2 < n3
   if (n0 == 1) {
+    // 1468
     var result = solve4(EXP_1ABC, n3, n2, n1);
     if (n1 == 2) {
-      // 1246
+      // 1238
       return filterSub(result, 2, 1).concat(appendSub(solve4(EXP_AB, n3, n2), 2, 1));
     }
-    // 1468
-    return result;
-  }
-  var result = solve4(EXP_ABCD, n3, n2, n1, n0);
-  if (n1 - n0 == 1) {
-    result = filterSub(result, n1, n0).concat(appendSub(solve4(EXP_AB, n3, n2), n1, n0));
-    if (n2 - n1 == 1) {
-      // 3458
-      return filterSub(result, n2, n1).concat(appendSub(solve4(EXP_AB, n3, n0), n2, n1));
-    }
-    // n1 - n0 == 1 && n3 - n2 == 1 && (n0 + n1 == 24 || n2 + n3 == 24) is impossible
-    // 3468
-    return result;
-  }
-  if (n2 - n1 == 1) {
-    result = filterSub(result, n2, n1).concat(appendSub(solve4(EXP_AB, n3, n0), n2, n1));
-    if (n3 - n2 == 1) {
-      // 4678
-      result = filterSub(result, n3, n2).concat(appendSub(solve4(EXP_AB, n1, n0), n3, n2));
-    }
-    // 3568
     return result;
   }
   // 236Q
-  return result;
+  var result = solve4(EXP_ABCD, n3, n2, n1, n0);
+  var result2 = [];
+  if (n1 - n0 == 1) {
+    // 34JK
+    result = filterSub(result, n1, n0);
+    result2 = result2.concat(appendSub(solve4(EXP_AB, n3, n2), n1, n0));
+  }
+  if (n2 - n1 == 1) {
+    // 3568
+    result = filterSub(result, n2, n1);
+    result2 = result2.concat(appendSub(solve4(EXP_AB, n3, n0), n2, n1));
+  }
+  if (n3 - n2 == 1) {
+    // 46910
+    result = filterSub(result, n3, n2);
+    result2 = result2.concat(appendSub(solve4(EXP_AB, n1, n0), n3, n2));
+  }
+  // 3458,38910,2378,5678
+  return result.concat(result2);
 }
