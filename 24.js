@@ -215,7 +215,7 @@ function solve(ns) {
     }
     return result;
   }
-  // 236Q
+  // 246Q
   var result = solve4(EXP_ABCD, n3, n2, n1, n0);
   var result2 = [];
   if (n1 - n0 == 1) {
