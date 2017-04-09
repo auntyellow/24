@@ -7,7 +7,7 @@ function append(input, suffix) {
 }
 
 function appendSub(input, nc, nd) {
-  return append(input, "*" + "(" + nc + "-" + nd + ")");
+  return append(input, "*(" + nc + "-" + nd + ")");
 }
 
 function filter(input, pattern) {

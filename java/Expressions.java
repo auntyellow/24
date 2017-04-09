@@ -1,4 +1,4 @@
-public class Expressions {
+public interface Expressions {
 	public static final String[] EXP_ABCD = {
 		"((a+b)+c)+d",
 		"((a+b)+c)-d",

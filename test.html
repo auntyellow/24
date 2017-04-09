@@ -10,6 +10,7 @@ function test(na, nb, nc, nd, expected) {
       solutions.length + " solution(s)<br>" + append(solutions, "=24").join("<br>") + "<br>";
 }
 
+var t = new Date().getTime();
 var s = "";
 // n0 = n1 = n2 = n3
 s += test(3, 3, 3, 3, 1);
@@ -64,6 +65,7 @@ s += test(3, 4, 5, 8, 6);
 s += test(3, 8, 9, 10, 3);
 s += test(2, 3, 7, 8, 4);
 s += test(5, 6, 7, 8, 3);
+s += (new Date().getTime() - t) + "ms";
 output.innerHTML = s;
 
 --></script>
