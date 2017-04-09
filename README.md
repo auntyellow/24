@@ -67,3 +67,18 @@ For situation `a, a', b, c` where `a' = a + 1`, we must consider that `a' - a` m
 `2, 4, 6, 6` has another pair of solutions that seems similar: `(6 - 4 + 2) × 6` (C) and `(6 - 4) × 2 × 6` (D), but we have not considered `(a" - a) + 2` similar to `(a" - a) × 2` where `a" = a + 2`.
 
 It is hard to implement the above two considerations, because A is similar to C obviously but B is not similar to D at all.
+
+## Combination with Most Solutions
+`2, 4, 8, 10` has 11 solutions:
+
+	10 + 8 + 4 + 2 = 24
+	(10 - 4) × 8 ÷ 2 = 24
+	(10 × 4 + 8) ÷ 2 = 24
+	((10 + 2) × 8 ÷ 4 = 24
+	10 × 2 + 8 - 4 = 24
+	(10 - 2) × 4 - 8 = 24
+	8 × 4 - 10 + 2 = 24
+	(8 ÷ 4 + 10) × 2 = 24
+	(8 × 2 - 10) × 4 = 24
+	(10 - 8 ÷ 2)) × 4 = 24
+	10 × 4 - 8 × 2 = 24
