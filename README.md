@@ -68,7 +68,7 @@ For situation `a, a', b, c` where `a' = a + 1`, we must consider that `a' - a` m
 
 It is hard to implement the above two considerations, because A is similar to C obviously but B is not similar to D at all.
 
-## Combination with Most Solutions
+## Combination with the most solutions
 `2, 4, 8, 10` has 11 solutions:
 
 	10 + 8 + 4 + 2 = 24
