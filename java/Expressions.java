@@ -5915,4 +5915,10 @@ public interface Expressions {
 	public static final String[] EXP_AB = {"a+b", "a*b"};
 
 	public static final String[] EXP_AA = {"a+a"};
+
+	public static String method(String expression) {
+		return "_" + expression.replace('(', 'L').replace(')', 'R').
+				replace('+', 'A').replace('-', 'S').
+				replace('*', 'M').replace('/', 'D');
+	}
 }

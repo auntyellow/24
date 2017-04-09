@@ -1,36 +1,29 @@
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.script.Compilable;
-import javax.script.CompiledScript;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-import javax.script.SimpleBindings;
-
 public class Solver implements Expressions {
-	private static HashMap<String, CompiledScript> scriptMap = new HashMap<>();
+	private static HashMap<String, Method> methodMap = new HashMap<>();
 
 	static {
-		Compilable engine = (Compilable) new ScriptEngineManager().
-				getEngineByMimeType("text/javascript");
 		for (Field field : Expressions.class.getFields()) {
 			String fieldName = field.getName();
 			if (!fieldName.startsWith("EXP_")) {
 				continue;
 			}
-			System.out.print("Compiling " + fieldName + "...");
 			try {
 				for (String expression : (String[]) field.get(null)) {
-					scriptMap.put(expression, engine.compile(expression));
+					methodMap.put(expression, Methods.class.
+							getMethod(Expressions.method(expression),
+							double.class, double.class, double.class, double.class));
 				}
-			} catch (ReflectiveOperationException | ScriptException e) {
+			} catch (ReflectiveOperationException e) {
 				throw new RuntimeException(e);
 			}
-			System.out.println("Done.");
 		}
 	}
 
@@ -41,25 +34,29 @@ public class Solver implements Expressions {
 
 	private static List<String> filter(List<String> input, int nc, int nd) {
 		String pattern = "(" + nc + "-" + nd + ")";
-		return input.stream().map(s -> "(" + s + ")").filter(s ->
-				s.indexOf("(" + pattern + "*") < 0 &&
-				s.indexOf("*" + pattern + ")") < 0 &&
-				s.indexOf("/" + pattern + ")") < 0).
-				collect(Collectors.toList());
+		return input.stream().filter(s -> {
+			String ss = "(" + s + ")";
+			return ss.indexOf("(" + pattern + "*") < 0 &&
+					ss.indexOf("*" + pattern + ")") < 0 &&
+					ss.indexOf("/" + pattern + ")") < 0;
+		}).collect(Collectors.toList());
 	}
 
 	private static List<String> solve4(String[] expressions, int... n) {
-		SimpleBindings bindings = new SimpleBindings();
+		Object[] args = new Object[4];
 		for (int i = 0; i < n.length; i ++) {
-			bindings.put("" + (char) ('a' + i), Integer.valueOf(n[i]));
+			args[i] = Double.valueOf(n[i]);
+		}
+		for (int i = n.length; i < 4; i ++) {
+			args[i] = Double.valueOf(0);
 		}
 		ArrayList<String> result = new ArrayList<>();
 		for (String expression : expressions) {
 			double val;
 			try {
-				val = ((Number) scriptMap.get(expression).
-						eval(bindings)).doubleValue();
-			} catch (ScriptException e) {
+				val = ((Number) methodMap.get(expression).
+						invoke(null, args)).doubleValue();
+			} catch (ReflectiveOperationException e) {
 				throw new RuntimeException(e);
 			}
 			if (Math.abs(val - 24) < .000_001) {
