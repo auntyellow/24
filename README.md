@@ -136,4 +136,4 @@ Combinations with solutions like `a × b - a × c = 24` are not listed, e.g. `10
 `3, 7, 9, 13` has 2 solutions:
 
     (7 - 13 ÷ 3) × 9 = 24 // fractional solution
-    9 × 7 - 13 × 3 = 24 // large number as intermediate step
+    9 × 7 - 13 × 3 = 24   // large number as intermediate step
