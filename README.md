@@ -129,4 +129,4 @@ It is hard to implement the above two considerations, because A is similar to C 
     5, 5, 8, 11
     2, 3, 13, 13
 
-Combinations with `a × b - a × c = 24` are not listed.
+Combinations like `a × b - a × c = 24` are not listed.
