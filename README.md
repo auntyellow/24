@@ -71,36 +71,36 @@ It is hard to implement the above two considerations, because A is similar to C 
 ## Combination with the most solutions
 `2, 4, 8, 10` has 11 solutions:
 
-	10 + 8 + 4 + 2 = 24
-	(10 - 4) × 8 ÷ 2 = 24
-	(10 × 4 + 8) ÷ 2 = 24
-	((10 + 2) × 8 ÷ 4 = 24
-	10 × 2 + 8 - 4 = 24
-	(10 - 2) × 4 - 8 = 24
-	8 × 4 - 10 + 2 = 24
-	(8 ÷ 4 + 10) × 2 = 24
-	(8 × 2 - 10) × 4 = 24
-	(10 - 8 ÷ 2)) × 4 = 24
-	10 × 4 - 8 × 2 = 24
+    10 + 8 + 4 + 2 = 24
+    (10 - 4) × 8 ÷ 2 = 24
+    (10 × 4 + 8) ÷ 2 = 24
+    ((10 + 2) × 8 ÷ 4 = 24
+    10 × 2 + 8 - 4 = 24
+    (10 - 2) × 4 - 8 = 24
+    8 × 4 - 10 + 2 = 24
+    (8 ÷ 4 + 10) × 2 = 24
+    (8 × 2 - 10) × 4 = 24
+    (10 - 8 ÷ 2)) × 4 = 24
+    10 × 4 - 8 × 2 = 24
 
-## Combinations with fraction solution(s) only
+## Combinations with fractional solution(s) only
 
     1, 3, 4, 6
     1, 4, 5, 6 (2 solutions)
     1, 5, 5, 5
     1, 6, 6, 8
-	1, 8, 12, 12
-	2, 2, 11, 11
-	2, 2, 13, 13
-	2, 3, 5, 12
-	2, 4, 10, 10
-	2, 5, 5, 10
-	2, 7, 7, 10
-	3, 3, 7, 7
-	3, 3, 8, 8
-	4, 4, 7, 7
-	5, 5, 7, 11
-	5, 7, 7, 11
+    1, 8, 12, 12
+    2, 2, 11, 11
+    2, 2, 13, 13
+    2, 3, 5, 12
+    2, 4, 10, 10
+    2, 5, 5, 10
+    2, 7, 7, 10
+    3, 3, 7, 7
+    3, 3, 8, 8
+    4, 4, 7, 7
+    5, 5, 7, 11
+    5, 7, 7, 11
 
 ## Solutions with large number as intermediate step
 
@@ -130,3 +130,11 @@ It is hard to implement the above two considerations, because A is similar to C 
     2, 3, 13, 13
 
 Combinations with solutions like `a × b - a × c = 24` are not listed, e.g. `10, 12, 12, 12`
+
+## Other difficult solutions
+
+`3, 7, 9, 13` has 2 solutions:
+
+    (7 - 13 ÷ 3) × 9 = 24 // fractional solution
+    9 × 7 - (13 × 3) = 24 // large number as intermediate step
+	
