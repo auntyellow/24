@@ -101,3 +101,32 @@ It is hard to implement the above two considerations, because A is similar to C 
 	4, 4, 7, 7
 	5, 5, 7, 11
 	5, 7, 7, 11
+
+## Solutions with large number as intermediate step
+
+    1, 7, 13, 13
+    6, 12, 12, 13
+    1, 6, 11, 13
+    6, 11, 12, 12
+    5, 10, 10, 13
+    1, 5, 11, 11
+    5, 10, 10, 11
+    4, 8, 8, 13
+    4, 4, 10, 10
+    4, 8, 8, 11
+    6, 9, 9, 10
+    3, 8, 8, 10
+    3, 5, 7, 13
+    3, 6, 6, 11
+    1, 2, 7, 7
+    5, 8, 9, 13
+    5, 9, 10, 11
+    4, 7, 11, 13
+    4, 9, 11, 11
+    4, 10, 10, 11
+    6, 7, 7, 11
+    3, 5, 8, 13
+    5, 5, 8, 11
+    2, 3, 13, 13
+
+Combinations with `a × b - a × c = 24` are not listed.
