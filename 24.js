@@ -230,3 +230,77 @@ function solve(ns) {
   // 3458,38910,2378,5678
   return result.concat(result2);
 }
+
+function depar(solution, leftPar, rightPar) {
+  var inner = solution.substring(leftPar + 1, rightPar);
+  var opIndex;
+  var opInner;
+  if (inner.charAt(0) == "(") {
+    // ...((oxo)Xo)... (X = opInner)
+    opIndex = inner.indexOf(")") + 1;
+  } else if (inner.charAt(inner.length - 1) == ")") {
+    // ...(ox(oXo))...
+    opIndex = inner.indexOf("(") - 1;
+  } else {
+    // ...(oXo)...
+    opIndex = 1;
+  }
+  opInner = inner.charAt(opIndex);
+  while (opInner >= "0" && opInner <= "9") {
+    opIndex ++;
+    opInner = inner.charAt(opIndex);
+  }
+  // opOuter
+  var opLeft = "", opRight = "";
+  if (leftPar > 0) {
+    // oX(oxo)... (x = opInner, X = opOuter)
+    opLeft = solution.charAt(leftPar - 1);
+  }
+  if (rightPar < solution.length - 1) {
+    // ...(oxo)Xo
+    opRight = solution.charAt(rightPar + 1);
+  }
+  if (opInner == "+" || opInner == "-") {
+    if (opLeft == "*" || opLeft == "/" || opRight == "*" || opRight == "/") {
+      return solution;
+    }
+    if (opLeft == "-") {
+      // o-(o+o)... => o-o-o... , o-(o-o)... => o-o+o...
+      inner = inner.substring(0, opIndex) +
+          (opInner == "+" ? "-" : "+") + inner.substring(opIndex + 1);
+    }
+  } else if (opLeft == "/") {
+    // o/(o*o)... => o/o/o... , o/(o/o)... => o/o*o...
+    inner = inner.substring(0, opIndex) +
+        (opInner == "*" ? "/" : "*") + inner.substring(opIndex + 1);
+  }
+  return solution.substring(0, leftPar) + inner + solution.substring(rightPar + 1);
+}
+
+function renderOp(solution) {
+  return solution.split("+").join(" + ").split("-").join(" - ").
+      split("*").join(" &times; ").split("/").join(" &divide; ");
+}
+
+function render(solution) {
+  var leftPar1 = solution.indexOf('(');
+  var leftPar2 = solution.indexOf('(', leftPar1 + 1);
+  var rightPar2 = solution.lastIndexOf(')');
+  var rightPar1 = solution.lastIndexOf(')', rightPar2 - 1);
+  if (leftPar2 < 0 || rightPar1 < 0) {
+    return renderOp(depar(solution, leftPar1, rightPar2));
+  }
+  if (rightPar1 < leftPar2) {
+    return renderOp(depar(depar(solution, leftPar2, rightPar2), leftPar1, rightPar1));
+  }
+  var depared = depar(solution, leftPar1, rightPar2);
+  if (depared.length == solution.length) {
+    var inner = depared.substring(leftPar1 + 1, rightPar2);
+    depared = depared.substring(0, leftPar1) + "(" +
+        depar(inner, inner.indexOf('('), inner.lastIndexOf(')')) +
+        ")" + depared.substring(rightPar2 + 1);
+  } else {
+    depared = depar(depared, depared.indexOf('('), depared.lastIndexOf(')'));
+  }
+  return renderOp(depared);
+}

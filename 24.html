@@ -1,7 +1,7 @@
-<input type="text" id="input_a" value="A" size="1" onclick="this.select()" onkeydown="checkEnter(event)">
-<input type="text" id="input_b" value="J" size="1" onclick="this.select()" onkeydown="checkEnter(event)">
-<input type="text" id="input_c" value="Q" size="1" onclick="this.select()" onkeydown="checkEnter(event)">
-<input type="text" id="input_d" value="K" size="1" onclick="this.select()" onkeydown="checkEnter(event)">
+<input type="text" id="input_a" value="A" size="2" onclick="this.select()" onkeydown="checkEnter(event)">
+<input type="text" id="input_b" value="J" size="2" onclick="this.select()" onkeydown="checkEnter(event)">
+<input type="text" id="input_c" value="Q" size="2" onclick="this.select()" onkeydown="checkEnter(event)">
+<input type="text" id="input_d" value="K" size="2" onclick="this.select()" onkeydown="checkEnter(event)">
 <input type="button" value="Solve" onclick="clickSolve()"><br>
 <span id="output"></span>
 <script type="text/javascript" src="24-expressions.js"></script>
@@ -35,13 +35,14 @@ function checkEnter(event) {
 
 function clickSolve() {
   var ns = [parse(input_a.value), parse(input_b.value), parse(input_c.value), parse(input_d.value)];
-  if (ns.indexOf(0) >= 0) {
+  // if (ns.indexOf(0) >= 0) { // not supported by IE6
+  if (ns[0] == 0 || ns[1] == 0 || ns[2] == 0 || ns[3] == 0) {
     return false;
   }
   var solutions = solve(ns);
   var s = solutions.length + " solution(s)<br>";
   for (var i = 0; i < solutions.length; i ++) {
-    s += solutions[i] + "=24<br>";
+    s += render(solutions[i]) + " = 24<br>";
   }
   output.innerHTML = s;
   return false;

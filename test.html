@@ -9,7 +9,7 @@ function test(na, nb, nc, nd, expected) {
   var s = ns + " should have " + expected +
       " solution(s), actually " + solutions.length + " solution(s)<br>";
   for (var i = 0; i < solutions.length; i ++) {
-    s += solutions[i] + "=24<br>";
+    s += render(solutions[i]) + " = 24<br>";
   }
   output.innerHTML += s;
 }
@@ -69,6 +69,5 @@ test(3, 8, 9, 10, 3);
 test(2, 3, 7, 8, 4);
 test(5, 6, 7, 8, 3);
 output.innerHTML += (new Date().getTime() - t) + "ms";
-// output.innerHTML = s;
 
 --></script>
