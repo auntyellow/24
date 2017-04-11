@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class Solver implements Expressions {
+public class Solver extends Expressions {
 	private static HashMap<String, Method> methodMap = new HashMap<>();
 
 	static {
@@ -18,7 +17,7 @@ public class Solver implements Expressions {
 			try {
 				for (String expression : (String[]) field.get(null)) {
 					methodMap.put(expression, Methods.class.
-							getMethod(Expressions.method(expression),
+							getMethod(method(expression),
 							double.class, double.class, double.class, double.class));
 				}
 			} catch (ReflectiveOperationException e) {
@@ -27,19 +26,27 @@ public class Solver implements Expressions {
 		}
 	}
 
-	private static List<String> append(List<String> input, int nc, int nd) {
-		return input.stream().map(s -> s + "*(" + nc + "-" + nd + ")").
-				collect(Collectors.toList());
+	private static List<String> append(List<String> result,
+			String[] expressions, int na, int nb, int nc, int nd) {
+		String suffix = "*(" + nc + "-" + nd + ")";
+		for (String solution : solve4(expressions, na, nb)) {
+			result.add(solution + suffix);
+		}
+		return result;
 	}
 
 	private static List<String> filter(List<String> input, int nc, int nd) {
 		String pattern = "(" + nc + "-" + nd + ")";
-		return input.stream().filter(s -> {
+		List<String> output = new ArrayList<>();
+		for (String s : input) {
 			String ss = "(" + s + ")";
-			return ss.indexOf("(" + pattern + "*") < 0 &&
+			if (ss.indexOf("(" + pattern + "*") < 0 &&
 					ss.indexOf("*" + pattern + ")") < 0 &&
-					ss.indexOf("/" + pattern + ")") < 0;
-		}).collect(Collectors.toList());
+					ss.indexOf("/" + pattern + ")") < 0) {
+				output.add(s);
+			}
+		}
+		return output;
 	}
 
 	private static List<String> solve4(String[] expressions, int... n) {
@@ -91,8 +98,7 @@ public class Solver implements Expressions {
 				List<String> result = solve4(EXP_AAAB, n0, n3);
 				if (n3 - n0 == 1) {
 					// 3334
-					result = filter(result, n3, n0);
-					result.addAll(append(solve4(EXP_AA, n0), n3, n0));
+					return append(filter(result, n3, n0), EXP_AA, n0, 0, n3, n0);
 				}
 				return result;
 			}
@@ -110,8 +116,7 @@ public class Solver implements Expressions {
 				List<String> result = solve4(EXP_AABB, n2, n0);
 				if (n2 - n1 == 1) {
 					// 4455
-					result = filter(result, n2, n0);
-					result.addAll(append(solve4(EXP_AB, n2, n0), n3, n0));
+					return append(filter(result, n2, n0), EXP_AB, n2, n0, n3, n0);
 				}
 				return result;
 			}
@@ -125,8 +130,7 @@ public class Solver implements Expressions {
 				List<String> result = solve4(EXP_22AB, n3, n2);
 				if (n2 == 3) {
 					// 223Q
-					result = filter(result, 3, 2);
-					result.addAll(append(solve4(EXP_AB, n3, 2), 3, 2));
+					return append(filter(result, 3, 2), EXP_AB, n3, 2, 3, 2);
 				}
 				return result;
 			}
@@ -134,8 +138,7 @@ public class Solver implements Expressions {
 			List<String> result = solve4(EXP_AABC, n0, n3, n2);
 			if (n2 - n0 == 1) {
 				// 3348
-				result = filter(result, n2, n0);
-				result.addAll(append(solve4(EXP_AB, n3, n0), n2, n0));
+				return append(filter(result, n2, n0), EXP_AB, n3, n0, n2, n0);
 			}
 			// n3 - n2 == 1 && n0 + n0 == 24 is impossible
 			return result;
@@ -166,12 +169,12 @@ public class Solver implements Expressions {
 				if (n1 == 3) {
 					// 2338
 					result = filter(result, 3, 2);
-					result2.addAll(append(solve4(EXP_AB, n3, 3), 3, 2));
+					append(result2, EXP_AB, n3, 3, 3, 2);
 				}
 				if (n3 - n1 == 1) {
 					// 2QQK
 					result = filter(result, n3, n1);
-					result2.addAll(append(solve4(EXP_AB, n1, 2), n3, n1));
+					append(result2, EXP_AB, n1, 2, n3, n1);
 				}
 				// 2334
 				result.addAll(result2);
@@ -183,12 +186,12 @@ public class Solver implements Expressions {
 			if (n1 - n0 == 1) {
 				// 3446
 				result = filter(result, n1, n0);
-				result2.addAll(append(solve4(EXP_AB, n3, 1), n1, n0));
+				append(result2, EXP_AB, n3, 1, n1, n0);
 			}
 			if (n3 - n1 == 1) {
 				// 4667
 				result = filter(result, n3, n1);
-				result2.addAll(append(solve4(EXP_AB, n1, 0), n3, n1));
+				append(result2, EXP_AB, n1, 0, n3, n1);
 			}
 			// 5667
 			result.addAll(result2);
@@ -201,8 +204,7 @@ public class Solver implements Expressions {
 				List<String> result = solve4(EXP_1AAB, n3, n1);
 				if (n1 == 2) {
 					// 12QQ
-					result = filter(result, 2, 1);
-					result.addAll(append(solve4(EXP_AA, n2), 2, 1));
+					return append(filter(result, 2, 1), EXP_AA, n2, 0, 2, 1);
 				}
 				return result;
 			}
@@ -213,12 +215,12 @@ public class Solver implements Expressions {
 				if (n1 == 3) {
 					// 23QQ
 					result = filter(result, 3, 2);
-					result2.addAll(append(solve4(EXP_AA, n2), 3, 2));
+					append(result2, EXP_AA, n2, 0, 3, 2);
 				}
 				if (n2 - n1 == 1) {
 					// 2JQQ
 					result = filter(result, n2, n1);
-					result2.addAll(append(solve4(EXP_AB, n2, 2), n2, n1));
+					append(result2, EXP_AB, n2, 2, n2, n1);
 				}
 				// 2344
 				result.addAll(result2);
@@ -230,12 +232,12 @@ public class Solver implements Expressions {
 			if (n1 - n0 == 1) {
 				// 34QQ
 				result = filter(result, n1, n0);
-				result2.addAll(append(solve4(EXP_AA, n2), n1, n0));
+				append(result2, EXP_AA, n2, 0, n1, n0);
 			}
 			if (n2 - n1 == 1) {
 				// 3788
 				result = filter(result, n2, n1);
-				result2.addAll(append(solve4(EXP_AB, n2, n0), n2, n1));
+				append(result2, EXP_AB, n2, n0, n2, n1);
 			}
 			// JQKK
 			result.addAll(result2);
@@ -247,8 +249,7 @@ public class Solver implements Expressions {
 			List<String> result = solve4(EXP_1ABC, n3, n2, n1);
 			if (n1 == 2) {
 				// 1238
-				result = filter(result, 2, 1);
-				result.addAll(append(solve4(EXP_AB, n3, n2), 2, 1));
+				return append(filter(result, 2, 1), EXP_AB, n3, n2, 2, 1);
 			}
 			return result;
 		}
@@ -258,17 +259,17 @@ public class Solver implements Expressions {
 		if (n1 - n0 == 1) {
 			// 34JK
 			result = filter(result, n1, n0);
-			result2.addAll(append(solve4(EXP_AB, n3, n2), n1, n0));
+			append(result2, EXP_AB, n3, n2, n1, n0);
 		}
 		if (n2 - n1 == 1) {
 			// 3568
 			result = filter(result, n2, n1);
-			result2.addAll(append(solve4(EXP_AB, n3, n0), n2, n1));
+			append(result2, EXP_AB, n3, n0, n2, n1);
 		}
 		if (n3 - n2 == 1) {
 			// 46910
 			result = filter(result, n3, n2);
-			result2.addAll(append(solve4(EXP_AB, n1, n0), n3, n2));
+			append(result2, EXP_AB, n1, n0, n3, n2);
 		}
 		// 3458,38910,2378,5678
 		result.addAll(result2);

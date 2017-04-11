@@ -7,11 +7,13 @@ public class Test {
 		List<String> solutions = Solver.solve(ns);
 		System.out.println(Arrays.toString(ns) + " should have " + expected +
 				" solution(s), actually " + solutions.size() + " solution(s)");
-		solutions.forEach(s -> System.out.println(s + "=24"));
+		for (String s : solutions) {
+			System.out.println(s + "=24");
+		}
 	}
 
 	public static void main(String[] args) {
-		Solver.solve(new int[] {0, 0, 0, 0});
+		Solver.solve(new int[] {1, 1, 1, 1});
 		long t = System.currentTimeMillis();
 		// n0 = n1 = n2 = n3
 		test(3, 3, 3, 3, 1);

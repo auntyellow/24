@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -39,7 +38,7 @@ public class SolveAll {
 
 	public static void main(String[] args) {
 		TreeMap<Integer, List<Answer>> answersMap = new TreeMap<>();
-		TreeMap<Integer, List<Answer>> largestMap = new TreeMap<>(Comparator.reverseOrder());
+		TreeMap<Integer, List<Answer>> largestMap = new TreeMap<>();
 		List<Answer> fractionals = new ArrayList<>();
 		for (int h = 1; h <= 13; h ++) {
 			System.out.print("Solve [" + h + ", ... ");
@@ -92,7 +91,7 @@ public class SolveAll {
 									m = 0;
 									continue;
 								}
-								m = Math.min(m, Math.max(abs(left), abs(right)));
+								m = Math.min(m, Math.max(n1 * n2, n3 * n4));
 								continue;
 							}
 							if (leftPar1 == 0 && solution.charAt(rightPar2 + 1) == '/') {
@@ -153,7 +152,9 @@ public class SolveAll {
 		for (Answer a : answersMap.lastEntry().getValue()) {
 			System.out.println(Arrays.toString(a.numbers) +
 					" has " + a.solutions.size() + " solution(s)");
-			a.solutions.forEach(s -> System.out.println(s + "=24"));
+			for (String s : a.solutions) {
+				System.out.println(s + "=24");
+			}
 		}
 		Map.Entry<Integer, List<Answer>> entry = answersMap.firstEntry();
 		System.out.println(entry.getValue().size() +
@@ -163,17 +164,20 @@ public class SolveAll {
 		for (Answer a : fractionals) {
 			System.out.println(Arrays.toString(a.numbers) +
 					" has fractional solution(s) only");
-			a.solutions.forEach(s -> System.out.println(s + "=24"));
+			for (String s : a.solutions) {
+				System.out.println(s + "=24");
+			}
 		}
-		for (Map.Entry<Integer, List<Answer>> entry_ : largestMap.entrySet()) {
-			int m = entry_.getKey().intValue();
-			if (m <= 36) {
+		for (Integer m : largestMap.descendingKeySet()) {
+			if (m.intValue() <= 36) {
 				break;
 			}
-			for (Answer a : entry_.getValue()) {
+			for (Answer a : largestMap.get(m)) {
 				System.out.println(Arrays.toString(a.numbers) +
 						" has a large number " + m + " as intermediate step");
-				a.solutions.forEach(s -> System.out.println(s + "=24"));
+				for (String s : a.solutions) {
+					System.out.println(s + "=24");
+				}
 			}
 		}
 	}
