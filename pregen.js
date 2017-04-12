@@ -91,6 +91,7 @@ writeExp("EXP_111A", "a", "1", "1", "1");
 
 writeExp("EXP_22AB", "a", "b", "2", "2");
 writeExp("EXP_22AA", "a", "a", "2", "2");
+writeExp("EXP_222A", "a", "2", "2", "2");
 writeExp("EXP_122A", "a", "2", "2", "1");
 writeExp("EXP_2AAB", "a", "a", "b", "2");
 

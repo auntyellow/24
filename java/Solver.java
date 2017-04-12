@@ -94,6 +94,10 @@ public class Solver extends Expressions {
 					// 111Q
 					return solve4(EXP_111A, n3);
 				}
+				if (n0 == 2) {
+					// 2228
+					return solve4(EXP_222A, n3);
+				}
 				// 3335
 				List<String> result = solve4(EXP_AAAB, n0, n3);
 				if (n3 - n0 == 1) {

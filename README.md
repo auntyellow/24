@@ -51,6 +51,7 @@ But this does not work for 4 numbers with 2 same `(a, b, c, c)`, or with `1` (`1
     1, 1, 1, a
     2, 2, a, b // 2 + 2 = 2 × 2
     2, 2, a, a
+    2, 2, 2, a
     1, 2, 2, a
     2, a, a, b // 2 × a - a = (a + a) ÷ 2
 
