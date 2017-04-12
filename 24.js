@@ -282,7 +282,7 @@ function depar(solution, leftPar, rightPar) {
 }
 
 function renderOp(solution) {
-  return solution.split("+").join(" + ").split("-").join(" - ").
+  return solution.split("+").join(" + ").split("-").join(" &minus; ").
       split("*").join(" &times; ").split("/").join(" &divide; ");
 }
 
