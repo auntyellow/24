@@ -1,7 +1,7 @@
-var CONST_A = Math.PI;
-var CONST_B = Math.E;
-var CONST_C = Math.log(Math.PI);
-var CONST_D = Math.atan(Math.E);
+var CONST_A = Math.random();
+var CONST_B = Math.random();
+var CONST_C = Math.random();
+var CONST_D = Math.random();
 var PARENTHESES = ["((oxo)xo)xo", "(ox(oxo))xo", "(oxo)x(oxo)", "ox((oxo)xo)", "ox(ox(oxo))"];
 var OPERATORS = ["+", "-", "*", "/"];
 
@@ -50,10 +50,10 @@ function writeExp(name, sa, sb, sc, sd) {
             value = value.split("c").join(CONST_C);
             value = value.split("d").join(CONST_D);
             value = eval(value);
-            if (isNaN(value)) {
+            if (!isFinite(value)) {
               continue;
             }
-            var key = "_" + Math.floor(value * 1000000);
+            var key = "_" + Math.floor(value * 1000000000 + 0.5);
             var old = valueMap[key];
             if (typeof old == "string") {
               var oldSlashes = old.split("/").length;

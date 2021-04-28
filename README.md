@@ -33,7 +33,7 @@ We have other similar situations, e.g.
 ## Algorithms
 We need a set of all inequivalent expressions involving 4 operands. E.g. `a × b ÷ c + d = d + a ÷ c × b`, so we have `a × b ÷ c + d` in this set but not `d + a ÷ c × b`.
 
-We listed all expressions by combination of parenthesis skeletons, operand positions and operators. Then we tested each expression with 4 transcendental numbers (**π**, **e**, **ln π** and **arctan e**). Equivalent expressions always have same result, and vice versa. Finally, we found out 1,170 (matches with sequence [A140606](http://oeis.org/A140606)) inequivalent expressions.
+We listed all expressions by combination of parenthesis skeletons, operand positions and operators. Then we tested each expression with 4 random numbers (and run several times to avoid collision). Equivalent expressions always have same result, and vice versa. Finally, we found out 1,170 (matches with sequence [A140606](http://oeis.org/A140606)) inequivalent expressions.
 
 For 4 different numbers (`a, b, c, d`), we can test each expression to check whether it equals to 24. E.g. `2, 3, 6, 12`, there are `a + b + c + d`, `b × c ÷ a + d` and other 8 expressions match to 24.
 
