@@ -55,7 +55,7 @@ But this does not work for 4 numbers with 2 same `(a, b, c, c)`, or with `1` (`1
     1, 2, 2, a
     2, a, a, b // 2 × a - a = (a + a) ÷ 2
 
-In our JavaScript programs, [pregen.js](https://github.com/auntyellow/24/blob/master/pregen.js) generated these sets of inequivalent expressions and saved as [24-expressions.js](https://github.com/auntyellow/24/blob/master/24-expressions.js). [24.js](https://github.com/auntyellow/24/blob/master/pregen.js) just decides which set is used and find out all matched expressions.
+In our JavaScript programs, [pregen.js](https://github.com/auntyellow/24/blob/master/pregen.js) generated these sets of inequivalent expressions and saved as [24-expressions.js](https://github.com/auntyellow/24/blob/master/24-expressions.js). [24.js](https://github.com/auntyellow/24/blob/master/24.js) just decides which set is used and find out all matched expressions.
 
 For situation `a, a', b, c` where `a' = a + 1`, we must consider that `a' - a` may be useless. So we must filter out all expressions that contain `(a' - a) ×`, `× (a' - a)` and `÷ (a' - a)`, then try `b + c` and `b × c` in addition.
 
