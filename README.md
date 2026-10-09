@@ -1,5 +1,5 @@
 # 24 Game Solver
-[24 Game](https://en.wikipedia.org/wiki/24_Game) Solver: gives you all dissimilar solutions. [Try it!](http://ns1.xqbase.com:8080/24.html)
+[24 Game](https://en.wikipedia.org/wiki/24_Game) Solver: gives you all dissimilar solutions. [Try it!](https://www.chess-wizard.com/minigames/24.html)
 
 ## Similar Solutions
 For example, for the card with the numbers 2, 3, 6, Q(12), possible solutions are:
@@ -19,7 +19,7 @@ Here similar solutions are filtered out, e.g.
 We have other similar situations, e.g.
 
     4 × 6 + 5 - 5 = 24
-    4 × 6 × 5 / 5 = 24        // useless duplicated numbers
+    4 × 6 × 5 ÷ 5 = 24        // useless duplicated numbers
 
     12 × (13 × 1 - 11) = 24
     12 × (13 ÷ 1 - 11) = 24   // useless 1
